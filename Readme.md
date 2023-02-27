@@ -2,7 +2,7 @@
 
 Quick and Dirty (maybe) work-in-progress api.
 
-![App Code Quality](https://img.shields.io/static/v1?label=Status&message=Shitty&color=red "Title")
+![App Code Quality](https://img.shields.io/static/v1?label=Status&message=Works+On+My+Machine&color=yellow "App Status")
 
 
 # Endpoints 
@@ -18,3 +18,9 @@ These 2 returns same results.
 `/v1/thread/20-subat-2023-hatay-depremi-yardim-agi--7598878`
 
 To see the next page, check `pages` object.
+
+
+# Prerequisites
+- Node.JS
+- cheerio
+- node-fetch
