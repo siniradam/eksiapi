@@ -43,3 +43,12 @@ export async function apiRequest({ endpoint, query, post }) {
   //   return "";
   // });
 }
+
+export const extractMeta = (html) => {
+  const regex = /<meta property="(.*?)" content="(.*?)">/gm;
+  const meta = {};
+  for (const match of html.matchAll(regex)) {
+    meta[match[1]] = match[2];
+  }
+  return meta;
+};

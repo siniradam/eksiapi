@@ -53,13 +53,15 @@ export function parseBody($, htmlObject) {
       const item = $(li);
 
       const id = item.data("id");
-      const author = item.data("author");
+      const authorname = item.data("author");
+      const authornameesc = `${authorname}`.replaceAll(" ", "-");
       const author_id = item.data("author-id");
+
+      const avatar = item.find(".avatar").attr("src");
+
       return {
         id,
         content: item.children(".content").html().trim(),
-        author,
-        author_id,
         flags: item.data("flags").split(" "),
         isfavorite: item.data("isfavorite"),
         ispinned: item.data("ispinned"),
@@ -67,15 +69,15 @@ export function parseBody($, htmlObject) {
         favorite: item.data("favorite"),
         seyler: item.data("seyler"),
         comment: item.data("comment"),
-        // show: item.data("show"),
-        paths: {
-          linkPost: `https://eksisozluk.com/entry/${id}`,
-          linkAuthor: `https://eksisozluk.com/biri/${author}`.replaceAll(
-            " ",
-            "-"
-          ),
-          author: `${apiPath}/user/${author}`.replaceAll(" ", "-"),
+        author: {
+          name: authorname,
+          id: author_id,
+          link: `https://eksisozluk.com/biri/${authornameesc}`,
+          path: `${apiPath}/user/${authornameesc}`,
+          avatar,
         },
+        link: `https://eksisozluk.com/entry/${id}`,
+        // show: item.data("show"),
       };
     })
     .get();
