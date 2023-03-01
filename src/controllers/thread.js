@@ -1,5 +1,5 @@
 import * as cheerio from "cheerio";
-import { apiRequest } from "../utils/request.js";
+import { apiRequest, extractMeta } from "../utils/request.js";
 import { response, apiPath } from "../utils/response.js";
 
 export async function thread(threadTitle, page) {
@@ -36,13 +36,20 @@ function parsePage(html, page) {
 
   const posts = parseBody($, $("#entry-item-list"));
   const pages = parsePages($, $(".sub-title-container"), page);
-
-  //   let urlId = page.url.match(/--([0-9]{4,})/);
-  //   urlId = urlId ? urlId[1] : "";
+  // const meta = extractMeta(html)
+  const post = parsePost($);
 
   return {
+    ...post,
     posts,
     pages,
+  };
+}
+
+function parsePost($) {
+  return {
+    id: $("#title").data("id"),
+    title: $("#title").data("title"),
   };
 }
 
