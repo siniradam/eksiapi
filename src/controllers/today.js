@@ -43,8 +43,9 @@ export function parseTopicList($, htmlObject) {
       let val = item.text();
       return {
         value: val,
-        path: `${apiPath}/thread/${encodeURI(val)}`,
-        enc: encodeURI(val),
+        path: `${apiPath}/thread${encodeURI(item.attr("href"))}`,
+        pathencoded: `${apiPath}/thread/${encodeURI(val)}`,
+        encoded: encodeURI(val),
       };
     })
     .get()

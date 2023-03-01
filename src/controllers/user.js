@@ -27,7 +27,7 @@ export async function parseProfile(html) {
   const username = upt.data("nick");
 
   const user = {
-    avatar: $("#profile-logo").children("img").attr("href"),
+    avatar: `${$("#profile-logo").children("img").attr("src")}`,
     username,
     thread: upt.children("a").attr("href"),
     stats: {

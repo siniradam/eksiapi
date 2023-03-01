@@ -50,14 +50,17 @@ export function parseBody($, htmlObject) {
   let items = htmlObject
     .children("li")
     .map((i, li) => {
-      let item = $(li);
-      let id = item.data("id");
+      const item = $(li);
+
+      const id = item.data("id");
+      const author = item.data("author");
+      const author_id = item.data("author-id");
       return {
         id,
         content: item.children(".content").html().trim(),
-        author: item.data("author"),
-        author: item.data("author"),
-        flags: item.data("flags"),
+        author,
+        author_id,
+        flags: item.data("flags").split(" "),
         isfavorite: item.data("isfavorite"),
         ispinned: item.data("ispinned"),
         ispinnedonprofile: item.data("ispinnedonprofile"),
@@ -65,7 +68,14 @@ export function parseBody($, htmlObject) {
         seyler: item.data("seyler"),
         comment: item.data("comment"),
         // show: item.data("show"),
-        link: `https://eksisozluk.com/entry/${id}`,
+        paths: {
+          linkPost: `https://eksisozluk.com/entry/${id}`,
+          linkAuthor: `https://eksisozluk.com/biri/${author}`.replaceAll(
+            " ",
+            "-"
+          ),
+          author: `${apiPath}/user/${author}`.replaceAll(" ", "-"),
+        },
       };
     })
     .get();
